@@ -8,18 +8,33 @@ const { contactsRouter } = require('./contacts/contacts.router')
 
 exports.CrudServer = class {
     constructor() {
-        this.app=null
+        this.app = null;
     }
-    start() {
-        this.initServer()
-        // this.initDatabase()
-        this.initMiddlewarce()
-        this.initRoutes()
-        this.initErrorHandling()
-        this.startListening()
+    async start() {
+        this.initServer();
+        await this.initDatabase();
+        this.initMiddlewarce();
+        this.initRoutes();
+        this.initErrorHandling();
+        this.startListening();
     }
     initServer() {
-        this.app=express()
+        this.app = express();
+    }
+
+    
+    async initDatabase() {
+        try {
+            await mongoose.connect(process.env.MONGODB_URL, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+                useFindAndModify: false,
+            });
+            console.log("Database connection successful");
+        } catch (error) {
+            console.log(error);
+            process.exit(1);
+        }
     }
     initMiddlewarce() {
         this.app.use(express.json())
