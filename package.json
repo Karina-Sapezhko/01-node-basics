@@ -1,25 +1,18 @@
 {
-  "name": "hw-2",
+  "name": "hw-1",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/start.js",
-    "start": "npm i && node src/start.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "joi": "^17.3.0",
-    "joi-objectid": "^3.0.1",
-    "mongodb": "^3.6.3",
-    "mongoose": "^5.11.0",
-    "morgan": "^1.10.0",
     "nodemon": "^2.0.6",
-    "uuid": "^8.3.1"
+    "yargs": "^16.1.0"
   }
 }
