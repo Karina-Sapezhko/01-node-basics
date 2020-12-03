@@ -1,2 +1,2 @@
-const {CrudServer} = require('./server')
-new CrudServer().start()
+const { CrudServer } = require('./server');
+new CrudServer().start();
