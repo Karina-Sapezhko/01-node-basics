@@ -2,7 +2,10 @@ const express = require('express')
 const morgan = require('morgan')
 const path = require('path')
 const cors = require('cors')
+const mongoose = require('mongoose')
 const { contactsRouter } = require('./contacts/contacts.router')
+const { authRouter } = require('./auth/auth.router')
+const { usersRouter } = require('./users/users.router')
 
  require('dotenv').config({path: path.join(__dirname, '../.env')})
 
@@ -29,6 +32,7 @@ exports.CrudServer = class {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
                 useFindAndModify: false,
+                useCreateIndex: true
             });
             console.log("Database connection successful");
         } catch (error) {
@@ -43,10 +47,11 @@ exports.CrudServer = class {
     }
     initRoutes() { 
         this.app.use('/contacts', contactsRouter)
+        this.app.use('/auth', authRouter)
+        this.app.use('/users', usersRouter)
     }
     initErrorHandling() { 
         this.app.use((err, req, res, next) => {
-            console.log('err',err);
             const statusCode = err.status || 500
             return res.status(statusCode).send(err.message)
         })
@@ -54,7 +59,7 @@ exports.CrudServer = class {
     startListening() {
         const {PORT}=process.env
         this.app.listen(PORT, () => {
-            console.log(`ok ${PORT}`);
+            console.log('Started listening on port', PORT);
         })
     }
 }
