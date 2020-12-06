@@ -7,7 +7,8 @@ const { contactsRouter } = require('./contacts/contacts.router')
 const { authRouter } = require('./auth/auth.router')
 const { usersRouter } = require('./users/users.router')
 
- require('dotenv').config({path: path.join(__dirname, '../.env')})
+require('dotenv').config({ path: path.join(__dirname, '../.env') })
+
 
 exports.CrudServer = class {
     constructor() {
@@ -23,6 +24,7 @@ exports.CrudServer = class {
     }
     initServer() {
         this.app = express();
+        this.app.use(express.static('public'));
     }
 
     
